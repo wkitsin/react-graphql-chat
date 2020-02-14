@@ -5,7 +5,6 @@ const Subscription = ({ subscribeToMore, chatroomId }) => {
   useEffect(() => {
     return subscribeToMore({
       document: SUBSCRIPTION_ADD_MESSAGE_TO_ROOM,
-      variables: { chatroomId },
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
         const { messageAdded } = subscriptionData.data;
