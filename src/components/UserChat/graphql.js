@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const ME = gql`
+export const USER = gql`
   query {
     me {
       email

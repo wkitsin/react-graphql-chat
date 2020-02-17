@@ -1,22 +1,22 @@
 import { useEffect } from "react";
-import { SUBSCRIPTION_ADD_MESSAGE_TO_ROOM } from "./graphql";
+import { SUBSCRIPTION_ADD_COUNSELOR_MESSAGE_TO_ROOM } from "./graphql";
 
 const Subscription = ({ subscribeToMore, chatroomId }) => {
   useEffect(() => {
     return subscribeToMore({
-      document: SUBSCRIPTION_ADD_MESSAGE_TO_ROOM,
+      document: SUBSCRIPTION_ADD_COUNSELOR_MESSAGE_TO_ROOM,
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data) return prev;
-        const { messageAdded } = subscriptionData.data;
+        const { counselorMessageAdded } = subscriptionData.data;
         console.log({ prev, subscriptionData });
 
-        if (messageAdded) {
+        if (counselorMessageAdded) {
           const chatroom = prev.me.chatrooms.find(
             chatroom => chatroomId === chatroom.id
           );
 
           const alreadyInList = chatroom.messages.find(
-            message => message.id === messageAdded.id
+            message => message.id === counselorMessageAdded.id
           );
 
           if (alreadyInList) {
@@ -27,7 +27,7 @@ const Subscription = ({ subscribeToMore, chatroomId }) => {
             if (chatroomId === chatroom.id) {
               return {
                 ...chatroom,
-                messages: chatroom.messages.concat(messageAdded)
+                messages: chatroom.messages.concat(counselorMessageAdded)
               };
             } else {
               return chatroom;

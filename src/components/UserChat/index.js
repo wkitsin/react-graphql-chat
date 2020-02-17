@@ -1,6 +1,6 @@
 import React from "react";
 import { Query, Mutation } from "react-apollo";
-import { ME } from "./graphql";
+import { USER } from "./graphql";
 import MessageForm from "./MessageForm";
 import Subscription from "./Subscription/index";
 import { ADD_USER_MESSAGE_TO_ROOM } from "./graphql";
@@ -29,7 +29,7 @@ const UserChat = () => {
 
                       if (message) {
                         const currentMessages = cache.readQuery({
-                          query: ME
+                          query: USER
                         });
                         const chatroomId = chatroom.id;
 
@@ -49,7 +49,7 @@ const UserChat = () => {
                         console.log({ UpdateMessage });
 
                         cache.writeQuery({
-                          query: ME,
+                          query: USER,
                           data: {
                             me: {
                               ...currentMessages.me,
@@ -75,7 +75,7 @@ const UserChat = () => {
 
   return (
     <>
-      <Query query={ME}>
+      <Query query={USER}>
         {({ data, loading, subscribeToMore }) => {
           if (loading) return "...Loading";
           if (!data.me) return null;
