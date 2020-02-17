@@ -1,19 +1,5 @@
 import gql from "graphql-tag";
 
-export const REQUEST_SUBSCRIPTION = gql`
-  subscription {
-    chatRequest {
-      interest {
-        name
-      }
-      user {
-        email
-      }
-      status
-    }
-  }
-`;
-
 export const ME_WITH_REQUEST = gql`
   query {
     me {
@@ -24,6 +10,7 @@ export const ME_WITH_REQUEST = gql`
         }
       }
       requests {
+        id
         status
         user {
           email
