@@ -2,23 +2,12 @@ import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { ME } from "./graphql";
 import MessageForm from "./MessageForm";
-import Subscription from "../Subscription/index";
-import {
-  ADD_USER_MESSAGE_TO_ROOM,
-  ADD_COUNSELOR_MESSAGE_TO_ROOM
-} from "./MessageForm/graphql";
+import Subscription from "./Subscription/index";
+import { ADD_COUNSELOR_MESSAGE_TO_ROOM } from "./graphql";
 
-const Chat = userType => {
+const CounselorChat = () => {
   const chatroomsToRender = (chatrooms, subscribeToMore) => {
     if (!chatrooms) return null;
-
-    const mutationType = ({ userType }) => {
-      if (userType === "User") {
-        return ADD_USER_MESSAGE_TO_ROOM;
-      } else if (userType === "Counselor") {
-        return ADD_COUNSELOR_MESSAGE_TO_ROOM;
-      }
-    };
 
     return chatrooms.map(chatroom => (
       <>
@@ -26,17 +15,17 @@ const Chat = userType => {
         {chatroom.messages.map((message, index) => (
           <p key={index}>{message.content}</p>
         ))}
-        <Mutation mutation={mutationType(userType)}>
-          {(createUserMessage, { loading, data }) => (
+        <Mutation mutation={ADD_COUNSELOR_MESSAGE_TO_ROOM}>
+          {(createCounselorMessage, { loading, data }) => (
             <MessageForm
               chatroomId={chatroom.id}
               onSubmitForm={({ chatroomId, message, event }) => {
                 event.preventDefault();
-                return createUserMessage({
+                return createCounselorMessage({
                   variables: { content: message, chatroomId },
-                  update: (cache, { data: { createUserMessage } }) => {
+                  update: (cache, { data: { createCounselorMessage } }) => {
                     {
-                      const message = createUserMessage.message;
+                      const message = createCounselorMessage.message;
 
                       if (message) {
                         const currentMessages = cache.readQuery({
@@ -100,4 +89,4 @@ const Chat = userType => {
   );
 };
 
-export default Chat;
+export default CounselorChat;

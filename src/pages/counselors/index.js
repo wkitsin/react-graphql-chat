@@ -1,14 +1,17 @@
 import React from "react";
 import { ApolloProvider } from "react-apollo";
-import Chat from "../../components/Chat";
 import { client } from "./apollo";
 import CounselorInfo from "../../components/CounselorInfo";
+import Request from "../../components/Request";
+import CounselorChat from "../../components/CounselorChat";
 
 const Counselors = () => {
   return (
     <ApolloProvider client={client}>
       <CounselorInfo />
-      <Chat userType={"Counselor"} />
+      <CounselorChat />
+      <hr />
+      <Request />
     </ApolloProvider>
   );
 };
