@@ -3,11 +3,22 @@ import { Query, Mutation } from "react-apollo";
 import { ME } from "./graphql";
 import MessageForm from "./MessageForm";
 import Subscription from "../Subscription/index";
-import { ADD_MESSAGE_TO_ROOM } from "./MessageForm/graphql";
+import {
+  ADD_USER_MESSAGE_TO_ROOM,
+  ADD_COUNSELOR_MESSAGE_TO_ROOM
+} from "./MessageForm/graphql";
 
-const Chat = () => {
+const Chat = userType => {
   const chatroomsToRender = (chatrooms, subscribeToMore) => {
     if (!chatrooms) return null;
+
+    const mutationType = ({ userType }) => {
+      if (userType === "User") {
+        return ADD_USER_MESSAGE_TO_ROOM;
+      } else if (userType === "Counselor") {
+        return ADD_COUNSELOR_MESSAGE_TO_ROOM;
+      }
+    };
 
     return chatrooms.map(chatroom => (
       <>
@@ -15,7 +26,7 @@ const Chat = () => {
         {chatroom.messages.map((message, index) => (
           <p key={index}>{message.content}</p>
         ))}
-        <Mutation mutation={ADD_MESSAGE_TO_ROOM}>
+        <Mutation mutation={mutationType(userType)}>
           {(createUserMessage, { loading, data }) => (
             <MessageForm
               chatroomId={chatroom.id}

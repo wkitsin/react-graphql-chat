@@ -1,16 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ApolloProvider } from "react-apollo";
-import UserInfo from "./components/UserInfo";
-import Chat from "./components/Chat";
-import { client } from "./apollo";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Users from "./pages/users";
+import Counselors from "./pages/counselors";
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <UserInfo />
-      <Chat />
-    </ApolloProvider>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to="/counselors">Counselors</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/counselors">
+            <Counselors />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
