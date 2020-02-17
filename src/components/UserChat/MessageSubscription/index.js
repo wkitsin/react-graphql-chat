@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SUBSCRIPTION_ADD_USER_MESSAGE_TO_ROOM } from "./graphql";
 
-const Subscription = ({ subscribeToMore, chatroomId }) => {
+const MessageSubscription = ({ subscribeToMore, chatroomId }) => {
   useEffect(() => {
     return subscribeToMore({
       document: SUBSCRIPTION_ADD_USER_MESSAGE_TO_ROOM,
@@ -42,4 +42,4 @@ const Subscription = ({ subscribeToMore, chatroomId }) => {
   return null;
 };
 
-export default Subscription;
+export default MessageSubscription;

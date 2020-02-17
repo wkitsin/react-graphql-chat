@@ -2,8 +2,9 @@ import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { USER } from "./graphql";
 import MessageForm from "./MessageForm";
-import Subscription from "./Subscription/index";
+import MessageSubscription from "./Subscription/index";
 import { ADD_USER_MESSAGE_TO_ROOM } from "./graphql";
+import ChatroomSubscription from "./ChatroomSubscription";
 
 const UserChat = () => {
   const chatroomsToRender = (chatrooms, subscribeToMore) => {
@@ -65,7 +66,7 @@ const UserChat = () => {
             />
           )}
         </Mutation>
-        <Subscription
+        <MessageSubscription
           subscribeToMore={subscribeToMore}
           chatroomId={chatroom.id}
         />
@@ -81,7 +82,10 @@ const UserChat = () => {
           if (!data.me) return null;
 
           return (
-            <div>{chatroomsToRender(data.me.chatrooms, subscribeToMore)}</div>
+            <div>
+              {chatroomsToRender(data.me.chatrooms, subscribeToMore)}
+              <ChatroomSubscription subscribeToMore={subscribeToMore} />
+            </div>
           );
         }}
       </Query>
