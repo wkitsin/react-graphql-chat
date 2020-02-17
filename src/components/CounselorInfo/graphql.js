@@ -5,7 +5,9 @@ export const COUNSELOR = gql`
     me {
       email
       chatrooms {
+        id
         messages {
+          id
           content
         }
       }

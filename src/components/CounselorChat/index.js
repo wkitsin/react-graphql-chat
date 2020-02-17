@@ -8,8 +8,8 @@ const CounselorChat = () => {
   const chatroomsToRender = (chatrooms, subscribeToMore) => {
     if (!chatrooms) return null;
 
-    return chatrooms.map(chatroom => (
-      <>
+    return chatrooms.map((chatroom, index) => (
+      <div key={index}>
         <h3>Chatroom ID: {chatroom.id}</h3>
         {chatroom.messages.map((message, index) => (
           <p key={index}>{message.content}</p>
@@ -25,6 +25,7 @@ const CounselorChat = () => {
                   update: (cache, { data: { createCounselorMessage } }) => {
                     {
                       const message = createCounselorMessage.message;
+
                       if (message) {
                         const currentMessages = cache.readQuery({
                           query: COUNSELOR
@@ -43,8 +44,6 @@ const CounselorChat = () => {
                             }
                           }
                         );
-
-                        console.log({ UpdateMessage, currentMessages });
 
                         cache.writeQuery({
                           query: COUNSELOR,
@@ -67,7 +66,7 @@ const CounselorChat = () => {
           subscribeToMore={subscribeToMore}
           chatroomId={chatroom.id}
         />
-      </>
+      </div>
     ));
   };
 

@@ -22,3 +22,17 @@ export const ME_WITH_REQUEST = gql`
     }
   }
 `;
+
+export const CREATE_CHATROOM = gql`
+  mutation($requestId: ID!) {
+    createChatroom(input: { requestId: $requestId }) {
+      chatroom {
+        id
+        messages {
+          id
+          content
+        }
+      }
+    }
+  }
+`;
