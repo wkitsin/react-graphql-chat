@@ -7,7 +7,8 @@ const Request = () => {
   const requestsToRender = requests =>
     requests.map(request => (
       <>
-        <p>Requster's Email: {request.user.email}</p>
+        <h1>Request: {request.id}</h1>
+        <p>Requester's Email: {request.user.email}</p>
         <p>Interest: {request.interest.name}</p>
         <p>Status: {request.status}</p>
       </>
