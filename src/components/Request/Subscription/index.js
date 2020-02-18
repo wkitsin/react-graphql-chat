@@ -12,7 +12,7 @@ const Subscription = ({ subscribeToMore }) => {
 
         const { chatRequest } = subscriptionData.data;
 
-        const alreadyInList = prev.me.requests.find(
+        const alreadyInList = prev.me.pendingRequests.find(
           request => request.id === chatRequest.id
         );
 
@@ -21,10 +21,9 @@ const Subscription = ({ subscribeToMore }) => {
         }
 
         return {
-          ...prev,
           me: {
             ...prev.me,
-            requests: [...prev.me.requests.concat(chatRequest)]
+            pendingRequests: [...prev.me.pendingRequests.concat(chatRequest)]
           }
         };
       }

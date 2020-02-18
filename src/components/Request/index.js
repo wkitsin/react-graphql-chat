@@ -67,7 +67,7 @@ const Request = () => {
 
           return (
             <>
-              {requestsToRender(data.me.requests)}
+              {requestsToRender(data.me.pendingRequests)}
               <Subscription subscribeToMore={subscribeToMore} />
             </>
           );

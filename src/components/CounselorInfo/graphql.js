@@ -11,7 +11,7 @@ export const COUNSELOR = gql`
           content
         }
       }
-      requests {
+      pendingRequests {
         status
         user {
           email

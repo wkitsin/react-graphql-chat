@@ -9,7 +9,7 @@ export const ME_WITH_REQUEST = gql`
           content
         }
       }
-      requests {
+      pendingRequests {
         id
         status
         user {

@@ -2,7 +2,7 @@ import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { USER } from "./graphql";
 import MessageForm from "./MessageForm";
-import MessageSubscription from "./Subscription/index";
+import MessageSubscription from "./MessageSubscription/index";
 import { ADD_USER_MESSAGE_TO_ROOM } from "./graphql";
 import ChatroomSubscription from "./ChatroomSubscription";
 
