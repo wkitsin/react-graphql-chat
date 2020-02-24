@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { REQUEST_SUBSCRIPTION } from "./graphql";
 
-const Subscription = ({ subscribeToMore }) => {
+const NewRequestSubscription = ({ subscribeToMore }) => {
   useEffect(() => {
     return subscribeToMore({
       document: REQUEST_SUBSCRIPTION,
@@ -32,4 +32,4 @@ const Subscription = ({ subscribeToMore }) => {
   return null;
 };
 
-export default Subscription;
+export default NewRequestSubscription;

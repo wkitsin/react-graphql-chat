@@ -1,8 +1,9 @@
 import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { ME_WITH_REQUEST, CREATE_CHATROOM } from "./graphql";
-import Subscription from "./Subscription";
 import { COUNSELOR } from "../CounselorChat/graphql";
+import UnresponsiveRequestSubscription from "./Subscription/UnresponsiveRequest";
+import NewRequestSubscription from "./Subscription/NewRequest";
 
 const Request = () => {
   const requestsToRender = requests =>
@@ -68,7 +69,10 @@ const Request = () => {
           return (
             <>
               {requestsToRender(data.me.pendingRequests)}
-              <Subscription subscribeToMore={subscribeToMore} />
+              <NewRequestSubscription subscribeToMore={subscribeToMore} />
+              <UnresponsiveRequestSubscription
+                subscribeToMore={subscribeToMore}
+              />
             </>
           );
         }}
