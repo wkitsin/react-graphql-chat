@@ -1,8 +1,5 @@
 fragment Review on Review {
-  comment
   id
+  comment
   rating
-  user {
-    ...User
-  }
 }

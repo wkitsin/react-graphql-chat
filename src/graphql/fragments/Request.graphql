@@ -1,13 +1,4 @@
 fragment Request on Request {
-  counselor {
-    ...Counselor
-  }
   id
-  interest {
-    ...Interest
-  }
   status
-  user {
-    ...User
-  }
 }

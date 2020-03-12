@@ -1,21 +1,18 @@
 fragment Organization on Organization {
-  banner {
-    ...Image
-  }
-  description
-  email
   id
-  interest {
-    ...Interest
-  }
+  name
+  email
+  description
   location
+  missionAndVision
+  phoneNumber
   logo {
     ...Image
   }
   media {
     ...Medium
   }
-  missionAndVision
-  name
-  phoneNumber
+  banner {
+    ...Image
+  }
 }

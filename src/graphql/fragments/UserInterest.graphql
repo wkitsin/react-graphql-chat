@@ -1,9 +1,0 @@
-fragment UserInterest on UserInterest {
-  id
-  interest {
-    ...Interest
-  }
-  user {
-    ...User
-  }
-}

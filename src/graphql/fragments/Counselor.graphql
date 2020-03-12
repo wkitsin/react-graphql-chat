@@ -1,15 +1,18 @@
 fragment Counselor on Counselor {
+  id
   deviceIds
   email
   gender
-  id
   optionalLanguage
   phoneNumber
   primaryLanguage
   secondaryLanguage
   termsAndConditionsAccepted
   username
-  avatar {
-    ...Image
+  pendingRequests {
+    ...Request
+  }
+  chatrooms {
+    ...Chatroom
   }
 }

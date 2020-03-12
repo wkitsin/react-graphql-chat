@@ -1,5 +1,5 @@
 fragment Image on Image {
-  blobId
   id
   url
+  blobId
 }

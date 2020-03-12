@@ -1,5 +1,0 @@
-query Company($id: ID!) {
-  company(id: $id) {
-    ...Company
-  }
-}

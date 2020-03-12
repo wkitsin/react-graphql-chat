@@ -1,5 +1,5 @@
 import React from "react";
-import { UserFragment } from "../../generated/graphql";
+import { CounselorFragment } from "../../generated/graphql";
 import {
   useCreateChatroomMutationMutation,
   useChatRequestSubscription,
@@ -10,17 +10,16 @@ import {
 
 const Request = () => {
   const { loading, error, data } = useMeQuery();
-  // if (loading) return <div>Loading ...</div>;
 
   const [addChatroom] = useCreateChatroomMutationMutation({
     update: (client, mutationResult) => {
-      const me = client.readQuery<UserFragment>({ query: MeDocument });
+      const me = client.readQuery<CounselorFragment>({ query: MeDocument });
       const { chatroom } = mutationResult.data.createChatroom;
 
       client.writeQuery({
         query: MeDocument,
         data: {
-          me: { ...me, chatrooms: [...me., chatroom] }
+          me: { ...me, chatrooms: [...me.chatrooms, chatroom] }
         }
       });
     }
@@ -87,6 +86,8 @@ const Request = () => {
         </button>
       </div>
     ));
+
+  if (!data) return <div>Loading ...</div>;
 
   return (
     <div style={{ margin: 20 }}>

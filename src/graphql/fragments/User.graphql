@@ -1,22 +1,16 @@
 fragment User on User {
-  chatrooms {
-    ...Chatroom
-  }
-  deviceIds
+  id
   email
   gender
-  id
+  username
   phoneNumber
+  deviceIds
   preferredLanguage
   termsAndConditionsAccepted
-  username
   avatar {
     ...Avatar
   }
-  company {
-    ...Company
-  }
-  interests {
-    ...Interest
+  chatrooms {
+    ...Chatroom
   }
 }

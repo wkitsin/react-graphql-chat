@@ -1,5 +1,0 @@
-query MeditationGuide($id: ID!) {
-  meditationGuide(id: $id) {
-    ...MeditationGuide
-  }
-}

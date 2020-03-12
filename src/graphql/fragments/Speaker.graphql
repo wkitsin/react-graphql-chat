@@ -1,13 +1,7 @@
 fragment Speaker on Speaker {
   id
+  name
   image {
     ...Image
-  }
-  name
-  users {
-    ...User
-  }
-  interest {
-    ...Interest
   }
 }

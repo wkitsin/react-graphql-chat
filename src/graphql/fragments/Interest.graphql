@@ -1,7 +1,4 @@
 fragment Interest on Interest {
   id
   name
-  image {
-    ...Image
-  }
 }

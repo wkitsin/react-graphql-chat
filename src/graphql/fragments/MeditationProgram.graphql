@@ -1,14 +1,11 @@
 fragment MeditationProgram on MeditationProgram {
-  description
   id
+  title
+  description
   image {
     ...Image
   }
   soundtrack {
     ...Sound
   }
-  speaker {
-    ...Speaker
-  }
-  title
 }

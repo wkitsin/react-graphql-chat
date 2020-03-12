@@ -1,5 +1,0 @@
-query Search($word: String!) {
-  search(word: $word) {
-    ...Search
-  }
-}

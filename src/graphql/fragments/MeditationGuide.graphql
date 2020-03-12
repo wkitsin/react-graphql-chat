@@ -1,8 +1,11 @@
 fragment MeditationGuide on MeditationGuide {
   description
   id
+  title
   image {
     ...Image
   }
-  title
+  programs {
+    ...MeditationProgram
+  }
 }

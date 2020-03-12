@@ -1,5 +1,0 @@
-query Interests {
-  interests {
-    ...Interest
-  }
-}
