@@ -8,7 +8,7 @@ export const USER = gql`
         id
         messages {
           id
-          content
+          text
         }
       }
     }

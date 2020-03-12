@@ -1,0 +1,3 @@
+fragment Search on Search {
+  content
+}

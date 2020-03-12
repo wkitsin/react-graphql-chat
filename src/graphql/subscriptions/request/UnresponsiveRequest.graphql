@@ -1,0 +1,12 @@
+subscription UnresponsiveRequest {
+  unresponsiveRequest {
+    id
+    status
+    interest {
+      ...Interest
+    }
+    user {
+      ...User
+    }
+  }
+}

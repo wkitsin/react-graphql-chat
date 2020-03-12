@@ -12,7 +12,7 @@ const CounselorChat = () => {
       <div key={index}>
         <h3>Chatroom ID: {chatroom.id}</h3>
         {chatroom.messages.map((message, index) => (
-          <p key={index}>{message.content}</p>
+          <p key={index}>{message.text}</p>
         ))}
         <Mutation mutation={ADD_COUNSELOR_MESSAGE_TO_ROOM}>
           {(createCounselorMessage, { loading, data }) => (
@@ -21,10 +21,11 @@ const CounselorChat = () => {
               onSubmitForm={({ chatroomId, message, event }) => {
                 event.preventDefault();
                 return createCounselorMessage({
-                  variables: { content: message, chatroomId },
+                  variables: { text: message, chatroomId },
                   update: (cache, { data: { createCounselorMessage } }) => {
                     {
                       const message = createCounselorMessage.message;
+                      console.log({ message });
 
                       if (message) {
                         const currentMessages = cache.readQuery({

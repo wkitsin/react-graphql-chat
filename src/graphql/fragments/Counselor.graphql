@@ -1,0 +1,15 @@
+fragment Counselor on Counselor {
+  deviceIds
+  email
+  gender
+  id
+  optionalLanguage
+  phoneNumber
+  primaryLanguage
+  secondaryLanguage
+  termsAndConditionsAccepted
+  username
+  avatar {
+    ...Image
+  }
+}

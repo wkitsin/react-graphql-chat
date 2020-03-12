@@ -8,7 +8,7 @@ export const USER = gql`
         id
         messages {
           id
-          content
+          text
         }
       }
     }
@@ -16,11 +16,11 @@ export const USER = gql`
 `;
 
 export const ADD_USER_MESSAGE_TO_ROOM = gql`
-  mutation($chatroomId: ID!, $content: String!) {
-    createUserMessage(input: { chatroomId: $chatroomId, content: $content }) {
+  mutation($chatroomId: ID!, $text: String!) {
+    createUserMessage(input: { chatroomId: $chatroomId, text: $text }) {
       message {
         id
-        content
+        text
       }
     }
   }

@@ -1,0 +1,8 @@
+fragment MeditationGuide on MeditationGuide {
+  description
+  id
+  image {
+    ...Image
+  }
+  title
+}

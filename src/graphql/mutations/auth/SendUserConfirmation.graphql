@@ -1,0 +1,10 @@
+mutation SendUserConfirmation($email: String!) {
+  sendUserConfirmation(input: { email: $email }) {
+    errors {
+      ...Error
+    }
+    user {
+      ...User
+    }
+  }
+}

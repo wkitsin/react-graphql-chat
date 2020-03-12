@@ -1,0 +1,16 @@
+subscription CounselorMessageAdded {
+  counselorMessageAdded {
+    id
+    text
+    createdAt
+    messagable {
+      __typename
+      ... on User {
+        ...User
+      }
+      ... on Counselor {
+        ...Counselor
+      }
+    }
+  }
+}

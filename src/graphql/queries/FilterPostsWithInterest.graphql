@@ -1,0 +1,5 @@
+query FilterPostsWithInterest($interestId: ID!) {
+  filterPostsWithInterest(interestId: $interestId) {
+    ...Post
+  }
+}

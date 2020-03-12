@@ -1,0 +1,21 @@
+fragment Post on Post {
+  content
+  id
+  image {
+    ...Image
+  }
+  soundtrack {
+    ...Sound
+  }
+  speaker {
+    ...Speaker
+  }
+  title
+  users {
+    ...User
+  }
+  interest {
+    ...Interest
+  }
+  youtubeLink
+}

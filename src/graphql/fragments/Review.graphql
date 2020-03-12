@@ -1,0 +1,8 @@
+fragment Review on Review {
+  comment
+  id
+  rating
+  user {
+    ...User
+  }
+}

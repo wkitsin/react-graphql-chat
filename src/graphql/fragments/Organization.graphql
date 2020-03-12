@@ -1,0 +1,21 @@
+fragment Organization on Organization {
+  banner {
+    ...Image
+  }
+  description
+  email
+  id
+  interest {
+    ...Interest
+  }
+  location
+  logo {
+    ...Image
+  }
+  media {
+    ...Medium
+  }
+  missionAndVision
+  name
+  phoneNumber
+}

@@ -1,0 +1,10 @@
+mutation SendSignInEmail($email: String!) {
+  sendSignInEmail(input: { email: $email }) {
+    user {
+      ...User
+    }
+    errors {
+      ...Error
+    }
+  }
+}

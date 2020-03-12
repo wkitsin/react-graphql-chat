@@ -1,0 +1,24 @@
+fragment Message on Message {
+  createdAt
+  id
+  text
+  messagable {
+    __typename
+    ... on Counselor {
+      id
+      username
+      avatar {
+        url
+      }
+    }
+    ... on User {
+      id
+      username
+      avatar {
+        image {
+          url
+        }
+      }
+    }
+  }
+}

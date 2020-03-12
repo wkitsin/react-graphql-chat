@@ -1,0 +1,5 @@
+fragment Sound on Sound {
+  blobId
+  id
+  url
+}

@@ -1,0 +1,10 @@
+mutation UpdateUserInterest($interestId: [ID!]!) {
+  updateUserInterest(input: { interestId: $interestId }) {
+    errors {
+      ...Error
+    }
+    userInterests {
+      ...UserInterest
+    }
+  }
+}

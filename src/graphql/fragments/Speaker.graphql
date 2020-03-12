@@ -1,0 +1,13 @@
+fragment Speaker on Speaker {
+  id
+  image {
+    ...Image
+  }
+  name
+  users {
+    ...User
+  }
+  interest {
+    ...Interest
+  }
+}

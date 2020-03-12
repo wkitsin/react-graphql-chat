@@ -1,0 +1,10 @@
+mutation CreateChatroomRequest($interestId: ID!) {
+  createChatroomRequest(input: { interestId: $interestId }) {
+    request {
+      ...Request
+    }
+    errors {
+      ...Error
+    }
+  }
+}

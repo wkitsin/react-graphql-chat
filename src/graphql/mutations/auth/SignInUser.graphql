@@ -1,0 +1,11 @@
+mutation SignInUser($signInToken: String!, $deviceId: String!) {
+  signInUser(input: { signInToken: $signInToken, deviceId: $deviceId }) {
+    errors {
+      ...Error
+    }
+    jwt
+    user {
+      ...User
+    }
+  }
+}

@@ -1,0 +1,5 @@
+fragment PDF on PDF {
+  blobId
+  id
+  url
+}

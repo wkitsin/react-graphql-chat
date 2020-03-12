@@ -19,7 +19,10 @@ const MessageForm = ({ chatroomId, onSubmitForm }) => {
       <button
         className="btn btn-primary ml-2"
         disabled={!message || message === ""}
-        onClick={event => onSubmitForm({ chatroomId, message, event })}
+        onClick={event => {
+          onSubmitForm({ chatroomId, message, event });
+          setMessage("");
+        }}
       >
         Post
       </button>

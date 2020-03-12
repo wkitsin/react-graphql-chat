@@ -1,0 +1,14 @@
+fragment Chatroom on Chatroom {
+  id
+  updatedAt
+  messages {
+    ...Message
+  }
+  counselor {
+    id
+    username
+    avatar {
+      ...Image
+    }
+  }
+}

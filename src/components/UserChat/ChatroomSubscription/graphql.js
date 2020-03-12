@@ -5,7 +5,7 @@ export const CHAT_ACCEPTED = gql`
     chatAccepted {
       id
       messages {
-        content
+        text
       }
     }
   }

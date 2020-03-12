@@ -8,7 +8,7 @@ export const COUNSELOR = gql`
         id
         messages {
           id
-          content
+          text
         }
       }
     }
@@ -16,13 +16,11 @@ export const COUNSELOR = gql`
 `;
 
 export const ADD_COUNSELOR_MESSAGE_TO_ROOM = gql`
-  mutation($chatroomId: ID!, $content: String!) {
-    createCounselorMessage(
-      input: { chatroomId: $chatroomId, content: $content }
-    ) {
+  mutation($chatroomId: ID!, $text: String!) {
+    createCounselorMessage(input: { chatroomId: $chatroomId, text: $text }) {
       message {
         id
-        content
+        text
       }
     }
   }

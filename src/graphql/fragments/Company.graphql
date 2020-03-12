@@ -1,0 +1,7 @@
+fragment Company on Company {
+  id
+  image {
+    ...Image
+  }
+  name
+}

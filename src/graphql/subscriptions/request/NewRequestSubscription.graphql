@@ -1,0 +1,12 @@
+subscription ChatRequest {
+  chatRequest {
+    id
+    status
+    interest {
+      ...Interest
+    }
+    user {
+      ...User
+    }
+  }
+}

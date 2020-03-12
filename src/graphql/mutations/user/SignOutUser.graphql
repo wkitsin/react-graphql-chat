@@ -1,0 +1,10 @@
+mutation SignOutUser {
+  signOutUser {
+    errors {
+      ...Error
+    }
+    user {
+      ...User
+    }
+  }
+}

@@ -1,0 +1,14 @@
+fragment MeditationProgram on MeditationProgram {
+  description
+  id
+  image {
+    ...Image
+  }
+  soundtrack {
+    ...Sound
+  }
+  speaker {
+    ...Speaker
+  }
+  title
+}

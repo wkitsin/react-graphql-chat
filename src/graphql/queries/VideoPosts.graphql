@@ -1,0 +1,5 @@
+query VideoPosts {
+  videoPosts {
+    ...Post
+  }
+}

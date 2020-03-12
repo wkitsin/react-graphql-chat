@@ -11,9 +11,8 @@ const httpLink = createHttpLink({
 
 const getCableUrl = () => {
   const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  const host = window.location.hostname;
-  const port = process.env.CABLE_PORT || "3000";
-  return `${protocol}//${host}:${port}/cable?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiaXNzIjoicGx1c3ZpYmVzLWFwaSIsImF1ZCI6ImNsaWVudCJ9.N0gBzEluP8t-910AzSso-J0lS_9rjfLNnJpbVKK5V30`;
+  const host = "localhost:3000";
+  return `${protocol}//${host}/cable?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiZGV2aWNlX2lkIjoiZGV2aWNlXzEiLCJpc3MiOiJwbHVzdmliZXMtYXBpIiwiYXVkIjoiY2xpZW50In0.-qAodI7_uDK4tTXoBpluiQy03uzX5f-MbaF56665MGg`;
 };
 
 const createActionCableLink = () => {
@@ -25,7 +24,7 @@ const authLink = new ApolloLink((operation, forward) => {
   // Use the setContext method to set the HTTP headers.
   operation.setContext({
     headers: {
-      authorization: `bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiaXNzIjoicGx1c3ZpYmVzLWFwaSIsImF1ZCI6ImNsaWVudCJ9.N0gBzEluP8t-910AzSso-J0lS_9rjfLNnJpbVKK5V30`
+      authorization: `eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiZGV2aWNlX2lkIjoiZGV2aWNlXzEiLCJpc3MiOiJwbHVzdmliZXMtYXBpIiwiYXVkIjoiY2xpZW50In0.-qAodI7_uDK4tTXoBpluiQy03uzX5f-MbaF56665MGg`
     }
   });
 

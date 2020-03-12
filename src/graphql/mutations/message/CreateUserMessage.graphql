@@ -1,0 +1,10 @@
+mutation CreateUserMessage($text: String!, $chatroomId: ID!) {
+  createUserMessage(input: { text: $text, chatroomId: $chatroomId }) {
+    message {
+      ...Message
+    }
+    errors {
+      ...Error
+    }
+  }
+}
