@@ -1,5 +1,4 @@
 import React from "react";
-import { CounselorFragment } from "../../generated/graphql";
 import {
   useCreateChatroomMutationMutation,
   useChatRequestSubscription,
@@ -9,19 +8,21 @@ import {
 } from "../../generated/graphql";
 
 const Request = () => {
-  const { loading, error, data } = useMeQuery();
+  const { data } = useMeQuery();
 
   const [addChatroom] = useCreateChatroomMutationMutation({
     update: (client, mutationResult) => {
-      const me = client.readQuery<CounselorFragment>({ query: MeDocument });
+      const { me } = client.readQuery({ query: MeDocument });
       const { chatroom } = mutationResult.data.createChatroom;
 
-      client.writeQuery({
-        query: MeDocument,
-        data: {
-          me: { ...me, chatrooms: [...me.chatrooms, chatroom] }
-        }
-      });
+      if (me) {
+        client.writeQuery({
+          query: MeDocument,
+          data: {
+            me: { ...me, chatrooms: [...me.chatrooms, chatroom] }
+          }
+        });
+      }
     }
   });
 

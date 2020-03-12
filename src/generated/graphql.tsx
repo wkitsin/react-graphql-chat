@@ -438,7 +438,10 @@ export type PostFragment = (
 
 export type ProgramFragment = Pick<Program, 'id' | 'title' | 'description'>;
 
-export type RequestFragment = Pick<Request, 'id' | 'status'>;
+export type RequestFragment = (
+  Pick<Request, 'id' | 'status'>
+  & { user: UserFragment, interest: InterestFragment }
+);
 
 export type ReviewFragment = Pick<Review, 'id' | 'comment' | 'rating'>;
 
@@ -514,12 +517,15 @@ export const CompanyFragmentDoc = gql`
   }
 }
     ${ImageFragmentDoc}`;
-export const RequestFragmentDoc = gql`
-    fragment Request on Request {
+export const AvatarFragmentDoc = gql`
+    fragment Avatar on Avatar {
   id
-  status
+  image {
+    ...Image
+  }
+  name
 }
-    `;
+    ${ImageFragmentDoc}`;
 export const MessageFragmentDoc = gql`
     fragment Message on Message {
   createdAt
@@ -554,6 +560,44 @@ export const ChatroomFragmentDoc = gql`
   }
 }
     ${MessageFragmentDoc}`;
+export const UserFragmentDoc = gql`
+    fragment User on User {
+  id
+  email
+  gender
+  username
+  phoneNumber
+  deviceIds
+  preferredLanguage
+  termsAndConditionsAccepted
+  avatar {
+    ...Avatar
+  }
+  chatrooms {
+    ...Chatroom
+  }
+}
+    ${AvatarFragmentDoc}
+${ChatroomFragmentDoc}`;
+export const InterestFragmentDoc = gql`
+    fragment Interest on Interest {
+  id
+  name
+}
+    `;
+export const RequestFragmentDoc = gql`
+    fragment Request on Request {
+  id
+  status
+  user {
+    ...User
+  }
+  interest {
+    ...Interest
+  }
+}
+    ${UserFragmentDoc}
+${InterestFragmentDoc}`;
 export const CounselorFragmentDoc = gql`
     fragment Counselor on Counselor {
   id
@@ -579,12 +623,6 @@ export const ErrorFragmentDoc = gql`
     fragment Error on Error {
   path
   detail
-}
-    `;
-export const InterestFragmentDoc = gql`
-    fragment Interest on Interest {
-  id
-  name
 }
     `;
 export const SoundFragmentDoc = gql`
@@ -693,34 +731,6 @@ export const SpeakerFragmentDoc = gql`
   }
 }
     ${ImageFragmentDoc}`;
-export const AvatarFragmentDoc = gql`
-    fragment Avatar on Avatar {
-  id
-  image {
-    ...Image
-  }
-  name
-}
-    ${ImageFragmentDoc}`;
-export const UserFragmentDoc = gql`
-    fragment User on User {
-  id
-  email
-  gender
-  username
-  phoneNumber
-  deviceIds
-  preferredLanguage
-  termsAndConditionsAccepted
-  avatar {
-    ...Avatar
-  }
-  chatrooms {
-    ...Chatroom
-  }
-}
-    ${AvatarFragmentDoc}
-${ChatroomFragmentDoc}`;
 export const UserNotificationSettingFragmentDoc = gql`
     fragment UserNotificationSetting on UserNotificationSetting {
   id
