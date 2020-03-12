@@ -13,6 +13,7 @@ const Chatroom = ({ chatroom }) => {
   const [addMessage] = useCreateCounselorMessageMutationMutation({
     update: (client, mutationResult) => {
       const { message } = mutationResult.data.createCounselorMessage;
+      console.log({ message });
 
       if (message) {
         const selectedChatroom = client.readFragment<ChatroomFragment>({
