@@ -1,0 +1,5 @@
+subscription ChatRequest {
+  chatRequest {
+    ...Request
+  }
+}

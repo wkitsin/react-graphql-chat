@@ -1,0 +1,6 @@
+fragment UserNotificationSetting on UserNotificationSetting {
+  id
+  name
+  active
+  kind
+}

@@ -1,0 +1,7 @@
+fragment Avatar on Avatar {
+  id
+  image {
+    ...Image
+  }
+  name
+}

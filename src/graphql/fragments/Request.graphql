@@ -1,0 +1,10 @@
+fragment Request on Request {
+  id
+  status
+  user {
+    ...User
+  }
+  interest {
+    ...Interest
+  }
+}

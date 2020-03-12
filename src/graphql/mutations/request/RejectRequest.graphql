@@ -1,0 +1,10 @@
+mutation RejectRequestMutation($requestId: ID!) {
+  rejectRequest(input: { requestId: $requestId }) {
+    request {
+      ...Request
+    }
+    errors {
+      ...Error
+    }
+  }
+}

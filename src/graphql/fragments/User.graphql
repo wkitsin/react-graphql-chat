@@ -1,0 +1,16 @@
+fragment User on User {
+  id
+  email
+  gender
+  username
+  phoneNumber
+  deviceIds
+  preferredLanguage
+  termsAndConditionsAccepted
+  avatar {
+    ...Avatar
+  }
+  chatrooms {
+    ...Chatroom
+  }
+}

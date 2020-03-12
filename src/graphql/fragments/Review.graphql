@@ -1,0 +1,5 @@
+fragment Review on Review {
+  id
+  comment
+  rating
+}

@@ -1,0 +1,23 @@
+overwrite: true
+schema: "http://localhost:3000/graphql/counselors"
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "fragment-matcher"
+    config:
+      withMutationFn: false
+      withHooks: true
+      withComponent: false
+      withHOC: false
+      reactApolloVersion: 3
+      maybeValue: T
+      avoidOptionals:
+        object: true
+        inputValue: false
+      skipTypename: true
+      apolloReactHooksImportFrom: "@apollo/react-hooks"
+      apolloReactCommonImportFrom: "@apollo/react-common"

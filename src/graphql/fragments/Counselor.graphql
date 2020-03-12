@@ -1,0 +1,18 @@
+fragment Counselor on Counselor {
+  id
+  deviceIds
+  email
+  gender
+  optionalLanguage
+  phoneNumber
+  primaryLanguage
+  secondaryLanguage
+  termsAndConditionsAccepted
+  username
+  pendingRequests {
+    ...Request
+  }
+  chatrooms {
+    ...Chatroom
+  }
+}

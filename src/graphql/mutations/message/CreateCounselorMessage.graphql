@@ -1,0 +1,10 @@
+mutation CreateCounselorMessageMutation($text: String!, $chatroomId: ID!) {
+  createCounselorMessage(input: {text: $text, chatroomId: $chatroomId}) {
+    message {
+      ...Message
+    }
+    errors {
+      ...Error
+    }
+  }
+}

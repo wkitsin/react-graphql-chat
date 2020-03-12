@@ -1,0 +1,5 @@
+fragment Image on Image {
+  id
+  url
+  blobId
+}

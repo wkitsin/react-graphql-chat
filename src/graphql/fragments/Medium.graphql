@@ -1,0 +1,8 @@
+fragment Medium on Medium {
+  id
+  name
+  title
+  pdf {
+    ...PDF
+  }
+}

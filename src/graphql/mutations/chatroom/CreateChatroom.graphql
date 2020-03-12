@@ -1,0 +1,10 @@
+mutation CreateChatroomMutation($requestId: ID!) {
+  createChatroom(input: {requestId: $requestId}) {
+    chatroom {
+      ...Chatroom
+    }
+    errors {
+      ...Error
+    }
+  }
+}

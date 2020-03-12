@@ -1,0 +1,6 @@
+fragment Chatroom on Chatroom {
+  id
+  messages {
+    ...Message
+  }
+}

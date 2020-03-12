@@ -14,7 +14,7 @@ const UserChat = () => {
       <>
         <h3>Chatroom ID: {chatroom.id}</h3>
         {chatroom.messages.map((message, index) => (
-          <p key={index}>{message.content}</p>
+          <p key={index}>{message.text}</p>
         ))}
         <Mutation mutation={ADD_USER_MESSAGE_TO_ROOM}>
           {(createUserMessage, { loading, data }) => (
@@ -23,7 +23,7 @@ const UserChat = () => {
               onSubmitForm={({ chatroomId, message, event }) => {
                 event.preventDefault();
                 return createUserMessage({
-                  variables: { content: message, chatroomId },
+                  variables: { text: message, chatroomId },
                   update: (cache, { data: { createUserMessage } }) => {
                     {
                       const message = createUserMessage.message;
