@@ -9,9 +9,9 @@ const Counselors = () => {
   return (
     <ApolloProvider client={client}>
       <CounselorInfo />
-      {/* <CounselorChat />
+      <CounselorChat />
       <hr />
-      <Request /> */}
+      <Request />
     </ApolloProvider>
   );
 };
