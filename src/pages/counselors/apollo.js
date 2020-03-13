@@ -16,8 +16,7 @@ const httpLink = createHttpLink({
 const getCableUrl = () => {
   const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
   const host = "plus-vibes-staging.herokuapp.com";
-  const port = process.env.CABLE_PORT || "3000";
-  return `${protocol}//${host}/cable?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvdW5zZWxvckBnbWFpbC5jb20iLCJkZXZpY2VfaWQiOiJkZXZpY2VfMSIsImlzcyI6InBsdXN2aWJlcy1hcGkiLCJhdWQiOiJjbGllbnQifQ.LVg-1DMGsglg6znxs1W1n3z-lOpS69gbuCF1b6hJ-RQ`;
+  return `${protocol}//${host}/cable?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvdW5zZWxvckBnbWFpbC5jb20iLCJpc3MiOiJwbHVzdmliZXMtYXBpIiwiYXVkIjoiY2xpZW50In0.RMsTsA72OvDpmoNjBp36kEaxZBhxd-llBh3TrPyagqo`;
 };
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
