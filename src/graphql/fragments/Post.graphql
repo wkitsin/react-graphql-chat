@@ -1,6 +1,6 @@
 fragment Post on Post {
   id
-  content
+  summary
   title
   image {
     ...Image

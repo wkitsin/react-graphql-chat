@@ -10,12 +10,12 @@ import ActionCableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
 import introspectionResult from "../../generated/graphql";
 
 const httpLink = createHttpLink({
-  uri: "http://plus-vibes-staging.herokuapp.com/graphql/counselors"
+  uri: "https://plusvibes.com/graphql/counselors"
 });
 
 const getCableUrl = () => {
   const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  const host = "plus-vibes-staging.herokuapp.com";
+  const host = "plusvibes.com";
   return `${protocol}//${host}/cable?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvdW5zZWxvckBnbWFpbC5jb20iLCJpc3MiOiJwbHVzdmliZXMtYXBpIiwiYXVkIjoiY2xpZW50In0.RMsTsA72OvDpmoNjBp36kEaxZBhxd-llBh3TrPyagqo`;
 };
 

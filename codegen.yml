@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://localhost:3000/graphql/counselors"
+schema: "https://staging.plusvibes.com/graphql/counselors"
 documents: "src/graphql/**/*.graphql"
 generates:
   src/generated/graphql.tsx:

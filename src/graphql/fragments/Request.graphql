@@ -4,7 +4,13 @@ fragment Request on Request {
   user {
     ...User
   }
-  interest {
-    ...Interest
+  requestable {
+    __typename
+    ... on Interest {
+      ...Interest
+    }
+    ... on Organization {
+      ...Organization
+    }
   }
 }

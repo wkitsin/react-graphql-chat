@@ -74,7 +74,6 @@ const Request = () => {
       <div key={index}>
         <div style={{ fontSize: 30 }}>Request: {request.id}</div>
         <div>Requester's Email: {request.user.email}</div>
-        <div>Interest: {request.interest.name}</div>
         <div>Status: {request.status}</div>
         <button
           onClick={() =>

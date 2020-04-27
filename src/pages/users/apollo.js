@@ -6,12 +6,12 @@ import ActionCable from "actioncable";
 import ActionCableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3000/graphql/users"
+  uri: "http://plusvibes-staging/graphql/users"
 });
 
 const getCableUrl = () => {
   const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  const host = "localhost:3000";
+  const host = "plusvibes-staging";
   return `${protocol}//${host}/cable?token=eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwiZGV2aWNlX2lkIjoiZGV2aWNlXzEiLCJpc3MiOiJwbHVzdmliZXMtYXBpIiwiYXVkIjoiY2xpZW50In0.-qAodI7_uDK4tTXoBpluiQy03uzX5f-MbaF56665MGg`;
 };
 

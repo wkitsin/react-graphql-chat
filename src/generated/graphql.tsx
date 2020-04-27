@@ -13,16 +13,10 @@ export type Scalars = {
   File: any;
 };
 
-export type Avatar = {
-  id: Scalars['ID'];
-  image: Image;
-  name: Scalars['String'];
-};
-
 export type Chatroom = {
   counselor: Counselor;
   id: Scalars['ID'];
-  messages: Maybe<Array<Message>>;
+  messages: Array<Message>;
   updatedAt: Scalars['ISO8601DateTime'];
   user: User;
 };
@@ -34,19 +28,18 @@ export type Company = {
 };
 
 export type Counselor = {
-  avatar: Maybe<Image>;
+  _id: Scalars['ID'];
+  avatar: Maybe<Scalars['String']>;
   chatroom: Maybe<Chatroom>;
-  chatrooms: Maybe<Array<Chatroom>>;
+  chatrooms: Array<Chatroom>;
   deviceIds: Array<Scalars['String']>;
   email: Scalars['String'];
   gender: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  optionalLanguage: Maybe<Scalars['String']>;
   organization: Organization;
-  pendingRequests: Maybe<Array<Request>>;
+  pendingRequests: Array<Request>;
   phoneNumber: Maybe<Scalars['String']>;
-  primaryLanguage: Maybe<Scalars['String']>;
-  secondaryLanguage: Maybe<Scalars['String']>;
+  preferredLanguage: Maybe<Scalars['String']>;
   termsAndConditionsAccepted: Scalars['Boolean'];
   username: Maybe<Scalars['String']>;
 };
@@ -114,9 +107,9 @@ export type MeditationGuide = {
 export type MeditationProgram = {
   description: Scalars['String'];
   id: Scalars['ID'];
-  image: Maybe<Image>;
+  image: Image;
   meditationGuide: MeditationGuide;
-  soundtrack: Maybe<Sound>;
+  soundtrack: Sound;
   speaker: Maybe<Speaker>;
   title: Scalars['String'];
   users: Array<User>;
@@ -133,12 +126,14 @@ export type Medium = {
 export type Messagable = User | Counselor;
 
 export type Message = {
+  _id: Scalars['ID'];
   chatroom: Chatroom;
   createdAt: Scalars['ISO8601DateTime'];
   id: Scalars['ID'];
   image: Maybe<Image>;
-  messagable: Messagable;
+  system: Scalars['Boolean'];
   text: Maybe<Scalars['String']>;
+  user: Messagable;
 };
 
 export type Mutation = {
@@ -149,6 +144,7 @@ export type Mutation = {
   sendSignInEmail: Maybe<SendCounselorSignInEmailPayload>;
   signInCounselor: Maybe<SignInCounselorPayload>;
   signOutCounselor: Maybe<SignOutCounselorPayload>;
+  updateCounselorInfo: Maybe<UpdateCounselorInfoPayload>;
   verifyCounselor: Maybe<VerifyCounselorPayload>;
 };
 
@@ -183,6 +179,11 @@ export type MutationSignInCounselorArgs = {
 };
 
 
+export type MutationUpdateCounselorInfoArgs = {
+  input: UpdateCounselorInfoInput;
+};
+
+
 export type MutationVerifyCounselorArgs = {
   input: VerifyCounselorInput;
 };
@@ -190,11 +191,12 @@ export type MutationVerifyCounselorArgs = {
 export type Organization = {
   banner: Maybe<Image>;
   description: Maybe<Scalars['String']>;
+  donationLink: Maybe<Scalars['String']>;
   email: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  interest: Maybe<Interest>;
+  interests: Maybe<Array<Interest>>;
   location: Maybe<Scalars['String']>;
-  logo: Maybe<Image>;
+  logo: Image;
   media: Maybe<Array<Medium>>;
   missionAndVision: Maybe<Scalars['String']>;
   name: Scalars['String'];
@@ -210,26 +212,41 @@ export type Pdf = {
 };
 
 export type Post = {
-  content: Maybe<Scalars['String']>;
+  articleLink: Maybe<Scalars['String']>;
+  featured: Scalars['Boolean'];
   id: Scalars['ID'];
   image: Maybe<Image>;
   interest: Maybe<Interest>;
   soundtrack: Maybe<Sound>;
-  speaker: Speaker;
+  speaker: Maybe<Speaker>;
+  summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
   users: Array<User>;
-  youtubeLink: Maybe<Scalars['String']>;
+  youtubeLinkId: Maybe<Scalars['String']>;
 };
 
 export type Program = {
   description: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  link: Scalars['String'];
   organization: Maybe<Organization>;
   title: Scalars['String'];
 };
 
 export type Query = {
   me: Maybe<Counselor>;
+  message: Maybe<Message>;
+  organization: Maybe<Organization>;
+};
+
+
+export type QueryMessageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryOrganizationArgs = {
+  id: Scalars['ID'];
 };
 
 export type RejectRequestInput = {
@@ -244,10 +261,12 @@ export type RejectRequestPayload = {
 export type Request = {
   counselor: Counselor;
   id: Scalars['ID'];
-  interest: Interest;
+  requestable: Requestable;
   status: Scalars['String'];
   user: User;
 };
+
+export type Requestable = Organization | Interest;
 
 export type Review = {
   chatroom: Chatroom;
@@ -262,8 +281,8 @@ export type SendCounselorConfirmationInput = {
 };
 
 export type SendCounselorConfirmationPayload = {
-  counselor: Maybe<Counselor>;
   errors: Maybe<Array<Error>>;
+  simpleCounselor: Maybe<SimpleCounselor>;
 };
 
 export type SendCounselorSignInEmailInput = {
@@ -271,8 +290,8 @@ export type SendCounselorSignInEmailInput = {
 };
 
 export type SendCounselorSignInEmailPayload = {
-  counselor: Maybe<Counselor>;
   errors: Maybe<Array<Error>>;
+  simpleCounselor: Maybe<SimpleCounselor>;
 };
 
 export type SignInCounselorInput = {
@@ -289,6 +308,11 @@ export type SignInCounselorPayload = {
 export type SignOutCounselorPayload = {
   counselor: Maybe<Counselor>;
   errors: Maybe<Array<Error>>;
+};
+
+export type SimpleCounselor = {
+  email: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type Sound = {
@@ -313,25 +337,38 @@ export type Subscription = {
   unresponsiveRequest: Maybe<Request>;
 };
 
+export type UpdateCounselorInfoInput = {
+  username?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
+  preferredLanguage?: Maybe<Scalars['String']>;
+};
+
+export type UpdateCounselorInfoPayload = {
+  counselor: Maybe<Counselor>;
+  errors: Maybe<Array<Error>>;
+};
+
 export type User = {
-  avatar: Maybe<Avatar>;
+  _id: Scalars['ID'];
+  avatar: Maybe<Scalars['String']>;
   chatroom: Maybe<Chatroom>;
-  chatrooms: Maybe<Array<Chatroom>>;
+  chatrooms: Array<Chatroom>;
   company: Company;
   deviceIds: Array<Scalars['String']>;
   email: Scalars['String'];
-  favouriteMeditationPrograms: Maybe<Array<MeditationProgram>>;
-  favouritePosts: Maybe<Array<Post>>;
-  favouriteSpeakers: Maybe<Array<Speaker>>;
-  favourites: Maybe<Array<UserFavourite>>;
+  favouriteMeditationPrograms: Array<MeditationProgram>;
+  favouritePosts: Array<Post>;
+  favouriteSpeakers: Array<Speaker>;
+  favourites: Array<UserFavourite>;
   gender: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   interest: Maybe<Array<Interest>>;
-  interests: Maybe<Array<Interest>>;
+  interests: Array<Interest>;
   phoneNumber: Maybe<Scalars['String']>;
   preferredLanguage: Maybe<Scalars['String']>;
   termsAndConditionsAccepted: Scalars['Boolean'];
-  userNotificationSettings: Maybe<Array<UserNotificationSetting>>;
+  userNotificationSettings: Array<UserNotificationSetting>;
   username: Maybe<Scalars['String']>;
 };
 
@@ -370,14 +407,9 @@ export type VerifyCounselorPayload = {
   jwt: Maybe<Scalars['String']>;
 };
 
-export type AvatarFragment = (
-  Pick<Avatar, 'id' | 'name'>
-  & { image: ImageFragment }
-);
-
 export type ChatroomFragment = (
   Pick<Chatroom, 'id'>
-  & { messages: Maybe<Array<MessageFragment>> }
+  & { messages: Array<MessageFragment> }
 );
 
 export type CompanyFragment = (
@@ -386,8 +418,8 @@ export type CompanyFragment = (
 );
 
 export type CounselorFragment = (
-  Pick<Counselor, 'id' | 'deviceIds' | 'email' | 'gender' | 'optionalLanguage' | 'phoneNumber' | 'primaryLanguage' | 'secondaryLanguage' | 'termsAndConditionsAccepted' | 'username'>
-  & { pendingRequests: Maybe<Array<RequestFragment>>, chatrooms: Maybe<Array<ChatroomFragment>> }
+  Pick<Counselor, 'id' | 'deviceIds' | 'email' | 'gender' | 'termsAndConditionsAccepted' | 'username'>
+  & { pendingRequests: Array<RequestFragment>, chatrooms: Array<ChatroomFragment> }
 );
 
 export type ErrorFragment = Pick<Error, 'path' | 'detail'>;
@@ -403,7 +435,7 @@ export type MeditationGuideFragment = (
 
 export type MeditationProgramFragment = (
   Pick<MeditationProgram, 'id' | 'title' | 'description'>
-  & { image: Maybe<ImageFragment>, soundtrack: Maybe<SoundFragment> }
+  & { image: ImageFragment, soundtrack: SoundFragment }
 );
 
 export type MediumFragment = (
@@ -412,27 +444,25 @@ export type MediumFragment = (
 );
 
 export type MessageFragment = (
-  Pick<Message, 'createdAt' | 'id' | 'text'>
-  & { messagable: (
+  Pick<Message, 'createdAt' | 'id' | 'text' | 'system'>
+  & { user: (
     { __typename: 'User' }
     & Pick<User, 'id' | 'username'>
-    & { avatar: Maybe<{ image: Pick<Image, 'url'> }> }
   ) | (
     { __typename: 'Counselor' }
     & Pick<Counselor, 'id' | 'username'>
-    & { avatar: Maybe<Pick<Image, 'url'>> }
   ) }
 );
 
 export type OrganizationFragment = (
   Pick<Organization, 'id' | 'name' | 'email' | 'description' | 'location' | 'missionAndVision' | 'phoneNumber'>
-  & { logo: Maybe<ImageFragment>, media: Maybe<Array<MediumFragment>>, banner: Maybe<ImageFragment> }
+  & { logo: ImageFragment, media: Maybe<Array<MediumFragment>>, banner: Maybe<ImageFragment> }
 );
 
 export type PdfFragment = Pick<Pdf, 'blobId' | 'id' | 'url'>;
 
 export type PostFragment = (
-  Pick<Post, 'id' | 'content' | 'title'>
+  Pick<Post, 'id' | 'summary' | 'title'>
   & { image: Maybe<ImageFragment> }
 );
 
@@ -440,7 +470,13 @@ export type ProgramFragment = Pick<Program, 'id' | 'title' | 'description'>;
 
 export type RequestFragment = (
   Pick<Request, 'id' | 'status'>
-  & { user: UserFragment, interest: InterestFragment }
+  & { user: UserFragment, requestable: (
+    { __typename: 'Organization' }
+    & OrganizationFragment
+  ) | (
+    { __typename: 'Interest' }
+    & InterestFragment
+  ) }
 );
 
 export type ReviewFragment = Pick<Review, 'id' | 'comment' | 'rating'>;
@@ -454,7 +490,7 @@ export type SpeakerFragment = (
 
 export type UserFragment = (
   Pick<User, 'id' | 'email' | 'gender' | 'username' | 'phoneNumber' | 'deviceIds' | 'preferredLanguage' | 'termsAndConditionsAccepted'>
-  & { avatar: Maybe<AvatarFragment>, chatrooms: Maybe<Array<ChatroomFragment>> }
+  & { chatrooms: Array<ChatroomFragment> }
 );
 
 export type UserNotificationSettingFragment = Pick<UserNotificationSetting, 'id' | 'name' | 'active' | 'kind'>;
@@ -517,37 +553,21 @@ export const CompanyFragmentDoc = gql`
   }
 }
     ${ImageFragmentDoc}`;
-export const AvatarFragmentDoc = gql`
-    fragment Avatar on Avatar {
-  id
-  image {
-    ...Image
-  }
-  name
-}
-    ${ImageFragmentDoc}`;
 export const MessageFragmentDoc = gql`
     fragment Message on Message {
   createdAt
   id
   text
-  messagable {
+  system
+  user {
     __typename
     ... on Counselor {
       id
       username
-      avatar {
-        url
-      }
     }
     ... on User {
       id
       username
-      avatar {
-        image {
-          url
-        }
-      }
     }
   }
 }
@@ -570,21 +590,55 @@ export const UserFragmentDoc = gql`
   deviceIds
   preferredLanguage
   termsAndConditionsAccepted
-  avatar {
-    ...Avatar
-  }
   chatrooms {
     ...Chatroom
   }
 }
-    ${AvatarFragmentDoc}
-${ChatroomFragmentDoc}`;
+    ${ChatroomFragmentDoc}`;
 export const InterestFragmentDoc = gql`
     fragment Interest on Interest {
   id
   name
 }
     `;
+export const PdfFragmentDoc = gql`
+    fragment PDF on PDF {
+  blobId
+  id
+  url
+}
+    `;
+export const MediumFragmentDoc = gql`
+    fragment Medium on Medium {
+  id
+  name
+  title
+  pdf {
+    ...PDF
+  }
+}
+    ${PdfFragmentDoc}`;
+export const OrganizationFragmentDoc = gql`
+    fragment Organization on Organization {
+  id
+  name
+  email
+  description
+  location
+  missionAndVision
+  phoneNumber
+  logo {
+    ...Image
+  }
+  media {
+    ...Medium
+  }
+  banner {
+    ...Image
+  }
+}
+    ${ImageFragmentDoc}
+${MediumFragmentDoc}`;
 export const RequestFragmentDoc = gql`
     fragment Request on Request {
   id
@@ -592,22 +646,25 @@ export const RequestFragmentDoc = gql`
   user {
     ...User
   }
-  interest {
-    ...Interest
+  requestable {
+    __typename
+    ... on Interest {
+      ...Interest
+    }
+    ... on Organization {
+      ...Organization
+    }
   }
 }
     ${UserFragmentDoc}
-${InterestFragmentDoc}`;
+${InterestFragmentDoc}
+${OrganizationFragmentDoc}`;
 export const CounselorFragmentDoc = gql`
     fragment Counselor on Counselor {
   id
   deviceIds
   email
   gender
-  optionalLanguage
-  phoneNumber
-  primaryLanguage
-  secondaryLanguage
   termsAndConditionsAccepted
   username
   pendingRequests {
@@ -660,48 +717,10 @@ export const MeditationGuideFragmentDoc = gql`
 }
     ${ImageFragmentDoc}
 ${MeditationProgramFragmentDoc}`;
-export const PdfFragmentDoc = gql`
-    fragment PDF on PDF {
-  blobId
-  id
-  url
-}
-    `;
-export const MediumFragmentDoc = gql`
-    fragment Medium on Medium {
-  id
-  name
-  title
-  pdf {
-    ...PDF
-  }
-}
-    ${PdfFragmentDoc}`;
-export const OrganizationFragmentDoc = gql`
-    fragment Organization on Organization {
-  id
-  name
-  email
-  description
-  location
-  missionAndVision
-  phoneNumber
-  logo {
-    ...Image
-  }
-  media {
-    ...Medium
-  }
-  banner {
-    ...Image
-  }
-}
-    ${ImageFragmentDoc}
-${MediumFragmentDoc}`;
 export const PostFragmentDoc = gql`
     fragment Post on Post {
   id
-  content
+  summary
   title
   image {
     ...Image
@@ -1006,6 +1025,18 @@ export type UnresponsiveRequestSubscriptionResult = ApolloReactCommon.Subscripti
           },
           {
             "name": "MeditationProgram"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Requestable",
+        "possibleTypes": [
+          {
+            "name": "Organization"
+          },
+          {
+            "name": "Interest"
           }
         ]
       }

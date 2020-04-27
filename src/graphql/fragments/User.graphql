@@ -7,9 +7,6 @@ fragment User on User {
   deviceIds
   preferredLanguage
   termsAndConditionsAccepted
-  avatar {
-    ...Avatar
-  }
   chatrooms {
     ...Chatroom
   }
